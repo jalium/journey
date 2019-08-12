@@ -5,7 +5,7 @@ let ObjectID = require("mongodb").ObjectID;
 let reloadMagic = require("./reload-magic.js");
 let multer = require("multer");
 let upload = multer({ dest: __dirname + "/uploads/" });
-reloadMagic(app);
+reloadMagic(app); 
 
 app.use("/", express.static("build")); // Needed for the HTML and JS files
 
