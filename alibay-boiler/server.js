@@ -15,14 +15,14 @@ let dbo = undefined;
 let url =
   "mongodb+srv://bob:bobsue@cluster0-ozsdo.mongodb.net/test?retryWrites=true&w=majority";
 MongoClient.connect(url, { useNewUrlParser: true }, (err, db) => {
-  dbo = db.db("media-board");
+  dbo = db.db("vacation");
 });
 
 // Your endpoints go after this line
-app.post("/signup", (req, res) => {
-  let username = req.body.username;
-  let password = req.body.password;
-  dbo.collection("users").insertOne({ username: username, password: password });
+app.post("/signup", upload.none(), (req, res) => {
+  let name = req.body.username;
+  let pwd = req.body.password;
+  dbo.collection("users").insertOne({ username: name, password: pwd });
 });
 
 app.post("/login", upload.none(), (req, res) => {
@@ -49,10 +49,10 @@ app.post("/login", upload.none(), (req, res) => {
   });
 });
 
-app.get("/experiences", (req, res) => {
-  console.log("request to /all-posts");
+app.get("/", (req, res) => {
+  console.log("request to /");
   dbo
-    .collection("posts")
+    .collection("vacay")
     .find({})
     .toArray((err, ps) => {
       if (err) {
