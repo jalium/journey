@@ -5,11 +5,7 @@ let ObjectID = require("mongodb").ObjectID;
 let reloadMagic = require("./reload-magic.js");
 let multer = require("multer");
 let upload = multer({ dest: __dirname + "/uploads/" });
-reloadMagic(app); 
-
-app.use("/", express.static("build")); // Needed for the HTML and JS files
-
-app.use("/uploads", express.static("uploads"));
+reloadMagic(app);
 
 let dbo = undefined;
 let url =
@@ -18,10 +14,15 @@ MongoClient.connect(url, { useNewUrlParser: true }, (err, db) => {
   dbo = db.db("vacation");
 });
 
+app.use("/", express.static(__dirname + "/build")); // Needed for the HTML and JS files
+
+app.use("/uploads", express.static("uploads"));
+
 // Your endpoints go after this line
 app.post("/signup", upload.none(), (req, res) => {
   let name = req.body.username;
   let pwd = req.body.password;
+  console.log("something");
   dbo.collection("users").insertOne({ username: name, password: pwd });
 });
 
@@ -67,27 +68,25 @@ app.get("/", (req, res) => {
 
 app.post("/new-list", upload.single("img"), (req, res) => {
   console.log("request to /new-list. body: ", req.body);
-  let description = req.body.description;
-  let file = req.file;
-  let frontendPath = "/uploads/" + file.filename;
-  dbo
-    .collection("posts")
-    .insertOne({ description: description, frontendPath: frontendPath });
+  let listingTitle = req.body.listingTitle;
+  let destination = req.body.destination;
+  let amenities = req.body.amenities;
+  let rating = req.body.rating;
+  let date = req.body.date;
+  let price = req.body.price;
+  let img = req.file;
+  let frontendPath = "/uploads/" + img.filename;
+  dbo.collection("posts").insertOne({
+    listingTitle: listingTitle,
+    destination: destination,
+    amenities: amenities,
+    rating: rating,
+    date: date,
+    price: price,
+    frontendPath: frontendPath
+  });
   res.send(JSON.stringify({ success: true }));
 });
-
-//   app.post("/update", upload.none(), (req, res) => {
-//     console.log("request to /update");
-//     let id = req.body.id.toString();
-//     let desc = req.body.description;
-//     console.log("sent from client", desc, id);
-//     dbo
-//       .collection("posts")
-//       .updateOne({ _id: ObjectID(id) }, { $set: { description: desc } });
-//     res.send(JSON.stringify({ success: true }));
-//   });
-
-// Your endpoints go before this line
 
 app.all("/*", (req, res, next) => {
   // needed for react router
@@ -97,9 +96,3 @@ app.all("/*", (req, res, next) => {
 app.listen(4000, "0.0.0.0", () => {
   console.log("Server running on port 4000");
 });
-
-//experiences (all items)
-//signup
-//login
-//each itemID
-//list
