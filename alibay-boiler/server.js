@@ -18,12 +18,26 @@ app.use("/", express.static(__dirname + "/build")); // Needed for the HTML and J
 
 app.use("/uploads", express.static("uploads"));
 
-// Your endpoints go after this line
 app.post("/signup", upload.none(), (req, res) => {
   let name = req.body.username;
   let pwd = req.body.password;
-  console.log("something");
-  dbo.collection("users").insertOne({ username: name, password: pwd });
+  console.log(name, pwd);
+  dbo.collection("users").findOne({ username: name }, (err, user) => {
+    if (err) {
+      console.log("/login error", err);
+      res.send(JSON.stringify({ success: false }));
+      return;
+    }
+    if (user === null) {
+      dbo.collection("users").insertOne({ username: name, password: pwd });
+      console.log("username and pswd declared");
+      res.send(JSON.stringify({ success: true }));
+      return;
+    }
+    console.log("username exists");
+    res.send(JSON.stringify({ success: false }));
+    return;
+  });
 });
 
 app.post("/login", upload.none(), (req, res) => {
@@ -41,8 +55,6 @@ app.post("/login", upload.none(), (req, res) => {
       return;
     }
     if (user.password === pwd) {
-      //user.password is whats in the database
-      //pwd is what the user inputted
       res.send(JSON.stringify({ success: true }));
       return;
     }
@@ -50,8 +62,8 @@ app.post("/login", upload.none(), (req, res) => {
   });
 });
 
-app.get("/", (req, res) => {
-  console.log("request to /");
+app.get("/experiences", (req, res) => {
+  console.log("request to /experiences");
   dbo
     .collection("vacay")
     .find({})

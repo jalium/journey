@@ -15,53 +15,61 @@ class Signup extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: ""
+      usernameInput: "",
+      passwordInput: "",
+      username: undefined
     };
   }
   handleUsernameChange = event => {
     console.log("new username", event.target.value);
-    this.setState({ username: event.target.value });
+    this.setState({ usernameInput: event.target.value });
   };
   handlePasswordChange = event => {
     console.log("new password", event.target.value);
-    this.setState({ password: event.target.value });
+    this.setState({ passwordInput: event.target.value });
   };
-  handleSubmit = evt => {
+  handleSubmit = async evt => {
     evt.preventDefault();
     console.log("signup form submitted");
     let data = new FormData();
-    data.append("username", this.state.username);
-    data.append("password", this.state.password);
-    fetch("/signup", { method: "POST", body: data });
-    this.props.dispatch({
-      //might need to change if we put in travel agent vs. traveller
-      type: "login-success"
-    });
+    data.append("username", this.state.usernameInput);
+    data.append("password", this.state.passwordInput);
+    let response = await fetch("/signup", { method: "POST", body: data });
+    let bodyRes = await response.text();
+    console.log("/signup response", bodyRes);
+    let parsed = JSON.parse(bodyRes);
+    if (parsed.success) {
+      this.setState({ username: this.state.usernameInput });
+      // this.props.dispatch({
+      //   //might need to change if we put in travel agent vs. traveller
+      //   type: "login-success"
+      // });
+    }
   };
   render = () => {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <h3>Sign Up</h3>
-        Username
-        <input
-          type="text"
-          placeholder="Choose a username"
-          onChange={this.handleUsernameChange}
-        />
-        Password
-        <input
-          type="text"
-          placeholder="Choose a password"
-          onChange={this.handlePasswordChange}
-        />
-        <input type="submit" />
-      </form>
-    );
+    if (this.state.username === undefined) {
+      return (
+        <form onSubmit={this.handleSubmit}>
+          <h3>Sign Up</h3>
+          Username
+          <input
+            type="text"
+            placeholder="Choose a username"
+            onChange={this.handleUsernameChange}
+          />
+          Password
+          <input
+            type="text"
+            placeholder="Choose a password"
+            onChange={this.handlePasswordChange}
+          />
+          <input type="submit" />
+        </form>
+      );
+    }
+    return <Experiences />;
   };
 }
+
 let SignUpApp = connect()(Signup);
 export default SignUpApp;
-
-//7. In the backend, we need to send the username and password to MongoDB using insert.one
-//7. dbo.collection('users').insertOne({ username: XXX, password: XXX })
