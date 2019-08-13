@@ -4,6 +4,7 @@ import { BrowserRouter, Route } from "react-router-dom";
 import Signup from "./Signup.jsx";
 import Login from "./Login.jsx";
 import SellerForm from "./SellerForm.jsx";
+import Experience from "./Experiences.jsx";
 
 let renderMain = () => {
   return (
@@ -25,7 +26,7 @@ let renderSellerForm = () => {
 let renderExperiences = () => {
   return (
     <div>
-      <Experiences />
+      <Experience />
     </div>
   );
 };

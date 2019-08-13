@@ -25,62 +25,70 @@
 //6. If success is false, return. Else, dispatch the login page
 //7. connect() the unconnected function and name it
 //7. export default it
-
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Experience from "./Experiences.jsx";
+
 class UnconnectedLogin extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
-      password: ""
+      usernameInput: "",
+      passwordInput: "",
+      username: undefined
     };
   }
   handleUsernameChange = () => {
     console.log("You're in the handleUsernameChange");
     console.log("This is the usernaem input", event.target.value);
-    this.setState({ username: event.target.value });
+    this.setState({ usernameInput: event.target.value });
   };
 
   handlePasswordChange = () => {
     console.log("You're in the handPasswordChage");
     console.log("This is the password input", event.target.value);
-    this.setState({ password: event.target.value });
+    this.setState({ passwordInput: event.target.value });
   };
   handleSubmit = async evt => {
     evt.preventDefault();
     console.log("Form has been submitted");
     let data = new FormData();
-    data.append("username", this.state.username);
-    data.append("password", this.state.password);
+    data.append("username", this.state.usernameInput);
+    data.append("password", this.state.passwordInput);
     let response = await fetch("/login", {
       method: "POST",
-      body: data,
-      credentials: "include"
+      body: data
     });
     let responseBody = await response.text();
-    console.log("This is the responseBody", responseBody);
+    console.log("Login This is the responseBody", responseBody);
     let body = JSON.parse(responseBody);
-    console.log("This is the parsed body", body);
+    console.log("Login This is the parsed body", body);
+    if (body.success) {
+      this.setState({ username: this.state.usernameInput });
+    }
     if (!body.success) {
       alert("Invalid LogIn");
       return;
     }
-    this.props.dispatch({
+    /*this.props.dispatch({
       type: "login-success"
-    });
+    }); */
   };
   render = () => {
-    return (
-      <form onSubmit={this.handleSubmit}>
-        <h3>Login</h3>
-        Username
-        <input type="text" onChange={this.handleUsernameChange} />
-        Password
-        <input type="text" onChange={this.handlePasswordChange} />
-        <input type="submit" />
-      </form>
-    );
+    if (this.state.username === undefined) {
+      console.log("usernameInput", this.username);
+      return (
+        <form onSubmit={this.handleSubmit}>
+          <h3>Login</h3>
+          Username
+          <input type="text" onChange={this.handleUsernameChange} />
+          Password
+          <input type="text" onChange={this.handlePasswordChange} />
+          <input type="submit" />
+        </form>
+      );
+    }
+    return <Experience />;
   };
 }
 let Login = connect()(UnconnectedLogin);

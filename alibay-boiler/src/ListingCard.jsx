@@ -1,13 +1,15 @@
-import React, {Component} from 'react';
+import React, { Component } from "react";
 import { BrowserRouter, Route } from "react-router-dom";
 import "./main.css";
 
-class ListingCard extends Component  {
-render = () => {
-    return (<div className="listing card">
-
-    </div>)
+class ListingCard extends Component {
+  render = () => {
+    return (
+      <div className="listing card">
+        <div>{this.props.listingTitle}</div>
+      </div>
+    );
+  };
 }
-}
 
-export default ListingCard
+export default ListingCard;

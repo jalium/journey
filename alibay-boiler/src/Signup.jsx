@@ -11,6 +11,7 @@
 
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import Experience from "./Experiences.jsx";
 class Signup extends Component {
   constructor(props) {
     super(props);
@@ -67,7 +68,7 @@ class Signup extends Component {
         </form>
       );
     }
-    return <Experiences />;
+    return <Experience />;
   };
 }
 

@@ -10,14 +10,12 @@ class Experience extends Component {
     };
   }
 
-  componentDidMount = () => {
-    reload = async () => {
-      let response = await fetch("/experiences");
-      let body = await response.text();
-      console.log("/experiences response", body);
-      body = JSON.parse(body);
-      this.setState({ posts: body });
-    };
+  componentDidMount = async () => {
+    let response = await fetch("/experiences");
+    let body = await response.text();
+    console.log("/experiences response", body);
+    body = JSON.parse(body);
+    this.setState({ posts: body });
   };
 
   render = () => {
@@ -41,4 +39,4 @@ class Experience extends Component {
   };
 }
 
-export default Experiences;
+export default Experience;
