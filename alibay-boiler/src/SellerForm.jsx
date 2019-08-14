@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import RatingChangeApp from './RatingChange.jsx'
 class SellerForm extends Component {
   constructor(props) {
     super(props);
@@ -29,10 +30,10 @@ class SellerForm extends Component {
     console.log("This is the amenities input", event.target.value);
     this.setState({ amenities: event.target.value });
   };
-  handleRatingChange = () => {
+  handleRatingChange = (rating) => {
     console.log("You're in the handleRatingChange");
-    console.log("This is the rating input", event.target.value);
-    this.setState({ rating: event.target.value });
+    console.log("This is the rating input", rating);
+    this.setState({ rating: rating });
   };
   handleDateChange = () => {
     console.log("You're in the handleDateChange");
@@ -88,8 +89,7 @@ handleXXXChange = () => {
               What are the amenities?
               <input type="text" onChange={this.handleAmenitiesChange} />
               <div>
-                What is the rating of this vacation?
-                <input type="text" onChange={this.handleRatingChange} />
+                <RatingChangeApp onClick={this.handleRatingChange} />
                 <div>
                   What are the dates of this vacation?
                   <input type="text" onChange={this.handleDateChange} />
