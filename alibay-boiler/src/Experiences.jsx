@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import ListingCard from "./ListingCard.jsx";
+import RatingStatic from "./RatingStatic.jsx"
 
 class UnconnectedExperience extends Component {
   componentDidMount = async () => {
@@ -23,7 +24,7 @@ class UnconnectedExperience extends Component {
               listingTitle={post.listingTitle}
               destination={post.destination}
               amenities={post.amenities}
-              rating={post.rating}
+              rating={<RatingStatic rating = {post.rating}/>}
               date={post.date}
               price={post.price}
               frontendPath={post.frontendPath}

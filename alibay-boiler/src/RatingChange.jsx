@@ -25,7 +25,7 @@ class RatingChange extends Component {
         <div>What is the rating of this Vacation?</div>
         <StarRatingComponent 
           name="rate1" 
-          starCount={10}
+          starCount={5}
           value={rating}
           onStarClick={this.onStarClick.bind(this)}
         />

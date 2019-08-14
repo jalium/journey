@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import "./main.css";
+import RatingStatic from './RatingStatic.jsx'
 
 class SelectCard extends Component {
   render = () => {
@@ -16,9 +17,9 @@ class SelectCard extends Component {
             if (amen === "luxury hotel") {
               return <div>"luxury hotel img"</div>;
             }
-          })}
+          })} 
         </div>
-        <div>rating: {this.props.card.rating}</div>
+        <div>rating: <RatingStatic rating = {this.props.card.rating}/></div>
         <div>travel dates: {this.props.card.date}</div>
         <div>total price: {this.props.card.price}</div>
         <img height="100px" src={this.props.card.frontendPath} />
@@ -28,3 +29,5 @@ class SelectCard extends Component {
 }
 
 export default SelectCard;
+
+// i want to post the stars in each card. I'll take the this.props.card.rating and then display it as stars using RatingStatic.
