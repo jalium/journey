@@ -31,6 +31,7 @@ class Experience extends Component {
               date={post.date}
               price={post.price}
               frontendPath={post.frontendPath}
+              listingId={post._id}
             />
           );
         })}
