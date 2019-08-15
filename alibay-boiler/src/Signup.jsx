@@ -40,20 +40,22 @@ class Signup extends Component {
     if (this.state.username === undefined) {
       return (
         <form onSubmit={this.handleSubmit}>
-          <h3>Sign Up</h3>
-          Username
-          <input
-            type="text"
-            placeholder="Choose a username"
-            onChange={this.handleUsernameChange}
-          />
-          Password
-          <input
-            type="text"
-            placeholder="Choose a password"
-            onChange={this.handlePasswordChange}
-          />
-          <input type="submit" />
+          <div>Sign Up</div>
+          <div>
+            <input
+              type="text"
+              placeholder="Choose a username"
+              onChange={this.handleUsernameChange}
+            />
+          </div>
+          <div>
+            <input
+              type="password"
+              placeholder="Choose a password"
+              onChange={this.handlePasswordChange}
+            />
+          </div>
+          <input type="submit" value="Sign up now!" />
         </form>
       );
     }

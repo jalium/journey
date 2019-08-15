@@ -52,14 +52,24 @@ class UnconnectedLogin extends Component {
     if (this.state.username === undefined) {
       console.log("usernameInput", this.username);
       return (
-        <form onSubmit={this.handleSubmit}>
-          <h3>Login</h3>
-          Username
-          <input type="text" onChange={this.handleUsernameChange} />
-          Password
-          <input type="text" onChange={this.handlePasswordChange} />
-          <input type="submit" />
-        </form>
+        <div>
+          <div>Sign In</div>
+          <div>
+            <form onSubmit={this.handleSubmit}>
+              <input
+                type="text"
+                placeholder="Enter username"
+                onChange={this.handleUsernameChange}
+              />
+              <input
+                type="password"
+                placeholder="Enter password"
+                onChange={this.handlePasswordChange}
+              />
+              <input type="submit" value="Sign in" />
+            </form>
+          </div>
+        </div>
       );
     }
     return <Redirect to="/experiences" />;

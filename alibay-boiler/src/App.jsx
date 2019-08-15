@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import "./main.css";
+import "./login.css";
 import { BrowserRouter, Route } from "react-router-dom";
-import Signup from "./Signup.jsx";
-import Login from "./Login.jsx";
 import SellerForm from "./SellerForm.jsx";
 import Experience from "./Experiences.jsx";
 import SelectExp from "./SelectExp.jsx";
-
-// Testing ta cronjob
+import SignInOut from "./SignInAndOut.jsx";
 
 class UnconnectedApp extends Component {
   renderListing = routerData => {
@@ -17,7 +15,14 @@ class UnconnectedApp extends Component {
       return listing._id === listingId;
     });
     console.log(candidate);
-    return <SelectExp card={candidate[0]} />;
+    return (
+      <div>
+        <div className="top-bar">
+          <img src="/uploads/logo2.png" />
+        </div>
+        <SelectExp card={candidate[0]} />;
+      </div>
+    );
   };
 
   renderSearchDest = () => {
@@ -54,8 +59,14 @@ class UnconnectedApp extends Component {
 let renderMain = () => {
   return (
     <div>
-      <Signup />
-      <Login />
+      <div className="top-bar">
+        <img src="/uploads/logo2.png" />
+      </div>
+      <div>
+        <div>
+          <SignInOut />
+        </div>
+      </div>
     </div>
   );
 };
@@ -71,7 +82,12 @@ let renderSellerForm = () => {
 let renderExperiences = () => {
   return (
     <div>
-      <Experience />
+      <div className="top-bar">
+        <img src="/uploads/logo2.png" />
+      </div>
+      <div>
+        <Experience />
+      </div>
     </div>
   );
 };
