@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import RatingChangeApp from './RatingChange.jsx'
-import Amenities from "./CheckBox.jsx"
+import RatingChangeApp from "./RatingChange.jsx";
+import Amenities from "./CheckBox.jsx";
 
 class SellerForm extends Component {
   constructor(props) {
@@ -9,7 +9,7 @@ class SellerForm extends Component {
       listingTitle: "",
       destination: "",
       amenities: "", //this needs to submit as an array into mongo
-      rating: "", 
+      rating: "",
       date: "", //leave it as a string for now but we want a calender
       price: "",
       img: null
@@ -27,12 +27,12 @@ class SellerForm extends Component {
     console.log("This is the destintion input", event.target.value);
     this.setState({ destination: event.target.value });
   };
-  handleAmenitiesChange = (amenities) => {
+  handleAmenitiesChange = amenities => {
     console.log("You're in the handleAmenitiesChange");
     console.log("This is the amenities input", amenities);
     this.setState({ amenities: amenities });
   };
-  handleRatingChange = (rating) => {
+  handleRatingChange = rating => {
     console.log("You're in the handleRatingChange");
     console.log("This is the rating input", rating);
     this.setState({ rating: rating });
@@ -71,7 +71,7 @@ handleXXXChange = () => {
     data.append("price", this.state.price);
     data.append("img", this.state.img);
     // data.append other info that we'll add to the form
-    fetch("/new-list", {
+    fetch("/sellExp", {
       //sellerform endpoint
       method: "POST",
       body: data

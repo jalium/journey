@@ -6,7 +6,9 @@ import Signup from "./Signup.jsx";
 import Login from "./Login.jsx";
 import SellerForm from "./SellerForm.jsx";
 import Experience from "./Experiences.jsx";
-import SelectCard from "./SelectCard.jsx";
+import SelectExp from "./SelectExp.jsx";
+
+// Testing ta cronjob
 
 class UnconnectedApp extends Component {
   renderListing = routerData => {
@@ -15,7 +17,15 @@ class UnconnectedApp extends Component {
       return listing._id === listingId;
     });
     console.log(candidate);
-    return <SelectCard card={candidate[0]} />;
+    return <SelectExp card={candidate[0]} />;
+  };
+
+  renderSearchDest = () => {
+    return (
+      <div>
+        <SearchDest />
+      </div>
+    );
   };
 
   render = () => {
@@ -23,12 +33,17 @@ class UnconnectedApp extends Component {
       <BrowserRouter>
         <div>
           <Route exact={true} path="/" render={renderMain} />
-          <Route exact={true} path="/new-list" render={renderSellerForm} />
+          <Route exact={true} path="/sellExp" render={renderSellerForm} />
           <Route exact={true} path="/experiences" render={renderExperiences} />
           <Route
             exact={true}
             path="/experiences/:lid"
             render={this.renderListing}
+          />
+          <Route
+            exact={true}
+            path="/searchDest"
+            render={this.renderSearchDest}
           />
         </div>
       </BrowserRouter>

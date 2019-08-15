@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./main.css";
 
-class ListingCard extends Component {
+class BrowseExp extends Component {
   render = () => {
     return (
       <div className="card">
@@ -19,4 +19,4 @@ class ListingCard extends Component {
   };
 }
 
-export default ListingCard;
+export default BrowseExp;

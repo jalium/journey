@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
-import ListingCard from "./ListingCard.jsx";
+import BrowseExp from "./BrowseExp.jsx";
 import RatingStatic from "./RatingStatic.jsx";
+import Search from "./Search.jsx";
 
 class UnconnectedExperience extends Component {
   componentDidMount = async () => {
@@ -20,29 +21,39 @@ class UnconnectedExperience extends Component {
     return (
       <div>
         <div>
-          <Link to={"/new-list"}>List a Vacation</Link>
+          <Search />
         </div>
-        {this.props.posts.map(post => {
-          return (
-            <ListingCard
-              listingTitle={post.listingTitle}
-              destination={post.destination}
-              amenities={post.amenities}
-              rating={<RatingStatic rating={post.rating} />}
-              date={post.date}
-              price={post.price}
-              frontendPath={post.frontendPath}
-              listingId={post._id}
-            />
-          );
-        })}
+        <div>
+          <Link to={"/sellExp"}>List a Vacation</Link>
+        </div>
+        {this.props.posts
+          .filter(experience =>
+            experience.destination
+              .toLowerCase()
+              .includes(this.props.query.toLowerCase())
+          )
+          .map(post => {
+            return (
+              <BrowseExp
+                listingTitle={post.listingTitle}
+                destination={post.destination}
+                amenities={post.amenities}
+                rating={<RatingStatic rating={post.rating} />}
+                date={post.date}
+                price={post.price}
+                frontendPath={post.frontendPath}
+                listingId={post._id}
+              />
+            );
+          })}
       </div>
     );
   };
 }
 let mapStateToProps = state => {
   return {
-    posts: state.listings
+    posts: state.listings,
+    query: state.searchQuery
   };
 };
 

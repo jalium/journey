@@ -1,20 +1,24 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
+import { Redirect } from "react-router";
+
 class UnconnectedSearch extends Component {
   handleSubmit = event => {
-    this.props.dispatch({ type: "query", q: event.target.value });
+    event.preventDefault();
+    console.log("search form submitted");
+    console.log("search", this.props.query);
+    this.props.dispatch({ type: "query", q: this.searchInput.value });
   };
+
   render = () => {
     return (
       <div>
         <div>
-          Search for a destination
-          <input type="text" list="data" onSubmit={this.onSubmit} />
-          <datalist id="data">
-            {this.props.posts.map(destination => (
-              <option key={destination} value={desitnation.displayValue} />
-            ))}
-          </datalist>
+          <h3>Search for a destination</h3>
+          <form onSubmit={this.handleSubmit}>
+            <input type="text" ref={ref => (this.searchInput = ref)} />
+            <input type="submit" value="search" />
+          </form>
         </div>
       </div>
     );
