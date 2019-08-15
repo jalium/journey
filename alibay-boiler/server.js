@@ -78,6 +78,22 @@ app.get("/experiences", (req, res) => {
     });
 });
 
+app.post("/searchResult", upload.none(), (req, res) => {
+  console.log("request to /searchResults");
+  dbo
+    .collection("vacay")
+    .find({})
+    .toArray((err, ps) => {
+      if (err) {
+        console.log("error", err);
+        res.send(JSON.stringify({ success: false }));
+        return;
+      }
+      console.log("posts", ps);
+      res.send(JSON.stringify(ps));
+    });
+});
+
 app.post("/new-list", upload.single("img"), (req, res) => {
   console.log("request to /new-list. body: ", req.body);
   let listingTitle = req.body.listingTitle;

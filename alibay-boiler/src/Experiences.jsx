@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import ListingCard from "./ListingCard.jsx";
-import RatingStatic from "./RatingStatic.jsx"
+import RatingStatic from "./RatingStatic.jsx";
 
 class UnconnectedExperience extends Component {
   componentDidMount = async () => {
@@ -18,13 +19,16 @@ class UnconnectedExperience extends Component {
   render = () => {
     return (
       <div>
+        <div>
+          <Link to={"/new-list"}>List a Vacation</Link>
+        </div>
         {this.props.posts.map(post => {
           return (
             <ListingCard
               listingTitle={post.listingTitle}
               destination={post.destination}
               amenities={post.amenities}
-              rating={<RatingStatic rating = {post.rating}/>}
+              rating={<RatingStatic rating={post.rating} />}
               date={post.date}
               price={post.price}
               frontendPath={post.frontendPath}
