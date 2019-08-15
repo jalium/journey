@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import "./main.css";
 import RatingStatic from './RatingStatic.jsx'
+import Payment from './Stripe.jsx'
 
 class SelectCard extends Component {
   render = () => {
@@ -23,6 +24,7 @@ class SelectCard extends Component {
         <div>travel dates: {this.props.card.date}</div>
         <div>total price: {this.props.card.price}</div>
         <img height="100px" src={this.props.card.frontendPath} />
+        <div><Payment /></div> 
       </div>
     );
   };
