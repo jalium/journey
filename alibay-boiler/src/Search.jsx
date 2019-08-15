@@ -10,6 +10,11 @@ class UnconnectedSearch extends Component {
     this.props.dispatch({ type: "query", q: this.searchInput.value });
   };
 
+  handleClear = event => {
+    event.preventDefault();
+    this.props.dispatch({ type: "query", q: "" });
+  };
+
   render = () => {
     return (
       <div>
@@ -18,6 +23,9 @@ class UnconnectedSearch extends Component {
           <form onSubmit={this.handleSubmit}>
             <input type="text" ref={ref => (this.searchInput = ref)} />
             <input type="submit" value="search" />
+          </form>
+          <form onSubmit={this.handleClear}>
+            <input type="submit" value="clear search" />
           </form>
         </div>
       </div>
