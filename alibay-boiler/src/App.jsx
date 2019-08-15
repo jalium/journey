@@ -7,7 +7,6 @@ import Login from "./Login.jsx";
 import SellerForm from "./SellerForm.jsx";
 import Experience from "./Experiences.jsx";
 import SelectCard from "./SelectCard.jsx";
-import RatingStaticApp from "./RatingStatic.jsx"
 
 class UnconnectedApp extends Component {
   renderListing = routerData => {

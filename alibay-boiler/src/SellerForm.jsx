@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import RatingChangeApp from './RatingChange.jsx'
+import Amenities from "./CheckBox.jsx"
+
 class SellerForm extends Component {
   constructor(props) {
     super(props);
@@ -25,10 +27,10 @@ class SellerForm extends Component {
     console.log("This is the destintion input", event.target.value);
     this.setState({ destination: event.target.value });
   };
-  handleAmenitiesChange = () => {
+  handleAmenitiesChange = (amenities) => {
     console.log("You're in the handleAmenitiesChange");
-    console.log("This is the amenities input", event.target.value);
-    this.setState({ amenities: event.target.value });
+    console.log("This is the amenities input", amenities);
+    this.setState({ amenities: amenities });
   };
   handleRatingChange = (rating) => {
     console.log("You're in the handleRatingChange");
@@ -87,7 +89,7 @@ handleXXXChange = () => {
             <input type="text" onChange={this.handleDestinationChange} />
             <div>
               What are the amenities?
-              <input type="text" onChange={this.handleAmenitiesChange} />
+              <Amenities onCheck={this.handleAmenitiesChange} />
               <div>
                 <RatingChangeApp onClick={this.handleRatingChange} />
                 <div>

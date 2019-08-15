@@ -16,7 +16,6 @@ class RatingChange extends Component {
     this.props.onClick(nextValue)
     this.setState({rating: nextValue});
   }
- 
   render() {
     const { rating } = this.state;
     
