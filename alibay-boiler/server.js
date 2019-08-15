@@ -88,7 +88,7 @@ app.post("/new-list", upload.single("img"), (req, res) => {
   let price = req.body.price;
   let img = req.file;
   let frontendPath = "/uploads/" + img.filename;
-  dbo.collection("posts").insertOne({
+  dbo.collection("vacay").insertOne({
     listingTitle: listingTitle,
     destination: destination,
     amenities: amenities,

@@ -50,7 +50,7 @@ class SellerForm extends Component {
   handlePhotoChange = () => {
     console.log("You're in the handlePhotoChange");
     console.log("This is the photo input", event.target.files[0]);
-    this.setState({ img: event.target.value });
+    this.setState({ img: event.target.files[0] });
   };
   /* use this to add informtion from the form to the state
 handleXXXChange = () => {
@@ -61,15 +61,15 @@ handleXXXChange = () => {
 */
   handleSubmit = evt => {
     evt.preventDefault();
-    console.log("You're in the handleSubmit");
+    console.log("You're in the handleSubmit", this.state);
     let data = new FormData();
     data.append("listingTitle", this.state.listingTitle);
     data.append("destination", this.state.destination);
-    data.append("amenities"), this.state.amenities;
-    data.append("rating"), this.state.rating;
-    data.append("date"), this.state.date;
+    data.append("amenities", this.state.amenities);
+    data.append("rating", this.state.rating);
+    data.append("date", this.state.date);
     data.append("price", this.state.price);
-    data.append("photo", this.state.img);
+    data.append("img", this.state.img);
     // data.append other info that we'll add to the form
     fetch("/new-list", {
       //sellerform endpoint
@@ -97,7 +97,7 @@ handleXXXChange = () => {
                   <input type="text" onChange={this.handleDateChange} />
                   <div>
                     What is the price?
-                    <input type="text" onChange={this.handleDateChange} />
+                    <input type="text" onChange={this.handlePriceChange} />
                     <div>
                       Please upload a nice picutre
                       <input type="file" onChange={this.handlePhotoChange} />
