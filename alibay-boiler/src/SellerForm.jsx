@@ -8,7 +8,7 @@ class SellerForm extends Component {
     this.state = {
       listingTitle: "",
       destination: "",
-      amenities: "", //this needs to submit as an array into mongo
+      amenities: [], //this needs to submit as an array into mongo
       rating: "",
       date: "", //leave it as a string for now but we want a calender
       price: "",
