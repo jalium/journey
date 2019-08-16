@@ -10,7 +10,7 @@ class SellerForm extends Component {
       destination: "",
       amenities: [], //this needs to submit as an array into mongo
       rating: "",
-      date: "", //leave it as a string for now but we want a calender
+      date: [], //leave it as a string for now but we want a calender
       price: "",
       img: null
       //  XXX: ""
@@ -37,10 +37,10 @@ class SellerForm extends Component {
     console.log("This is the rating input", rating);
     this.setState({ rating: rating });
   };
-  handleDateChange = () => {
+  handleDateChange = (dateRange) => {
     console.log("You're in the handleDateChange");
-    console.log("This is the date input", event.target.value);
-    this.setState({ date: event.target.value });
+    console.log("This is the date input", dateRange);
+    this.setState({ date: dateRange });
   };
   handlePriceChange = () => {
     console.log("You're in the handlePriceChange");
@@ -92,9 +92,6 @@ handleXXXChange = () => {
               <Amenities onCheck={this.handleAmenitiesChange} />
               <div>
                 <RatingChangeApp onClick={this.handleRatingChange} />
-                <div>
-                  What are the dates of this vacation?
-                  <input type="text" onChange={this.handleDateChange} />
                   <div>
                     What is the price?
                     <input type="text" onChange={this.handlePriceChange} />
@@ -107,7 +104,6 @@ handleXXXChange = () => {
               </div>
             </div>
           </div>
-        </div>
         <input type="submit" />
       </form>
     );

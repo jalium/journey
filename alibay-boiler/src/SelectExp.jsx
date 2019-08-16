@@ -2,18 +2,20 @@ import React, { Component } from "react";
 import "./main.css";
 import RatingStatic from './RatingStatic.jsx'
 import Payment from './Stripe.jsx'
+import DateSelect from "./DateSelect.jsx"
+
 
 class SelectExp extends Component {
   render = () => {
     let amenitiesArray = []
     if(Array.isArray(this.props.card.amenities)){ //the orignals from Mongo are set as arrays, right now it's check if it's an array
-      console.log("Yo")
+      //console.log("Yo")
       amenitiesArray = this.props.card.amenities
     } else { // the new uploads are sent to Mongo as strings, so we're converting them here into arrays
     let amenitiesString = this.props.card.amenities
     amenitiesArray = amenitiesString.split(",")
     }
-    console.log("amenitiesArray", amenitiesArray)
+    //console.log("amenitiesArray", amenitiesArray)
     const perks = amenitiesArray.map(amen => {
       return <li>{amen} <img height = "15px" src = {"/uploads/"+amen+".png"}/></li>; //listing each one but we want to list each one with the image of the same name
  });
@@ -34,10 +36,10 @@ class SelectExp extends Component {
           })} 
         </div>*/}
         <div>Rating: <RatingStatic rating = {this.props.card.rating}/></div>
-        <div>Travel Dates: {this.props.card.date}</div>
+        <div>Travel Dates:<DateSelect/></div>
         <div>Total Price: {this.props.card.price}</div>
         <img height="100px" src={this.props.card.frontendPath} />
-        <div><Payment /></div> 
+        <div><Payment price = {this.props.card.price} listingTitle = {this.props.card.listingTitle}/></div> 
       </div>
     );
   };

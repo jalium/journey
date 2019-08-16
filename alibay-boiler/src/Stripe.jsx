@@ -21,7 +21,14 @@ onToken = (token) => {
       // ...
       <StripeCheckout
         token={this.onToken}
+        label= "Book now!"
+        amount = {this.props.price*100} //*100 because 1 = $0.01
+        billingAddress
+        name = {this.props.listingTitle}
+        image="/uploads/Japan.jpeg"
         stripeKey="pk_test_qRGpFETRAqOH6ezj3M3lYdgI00WjINP97n"
+        locale="auto"
+        description="Journey Get Away Today"
       />
     )
   }
