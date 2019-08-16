@@ -11,6 +11,7 @@ class SignInOut extends Component {
       passwordInputSignIn: "",
       usernameInputSignUp: "",
       passwordInputSignUp: "",
+      confirmPasswordInputSignUp: "",
       username: undefined
     };
   }
@@ -32,6 +33,11 @@ class SignInOut extends Component {
   handlePasswordChangeSignUp = event => {
     console.log("new password(signup)", event.target.value);
     this.setState({ passwordInputSignUp: event.target.value });
+  };
+
+  handleConfirmPasswordChangeSignUp = event => {
+    console.log("new confirmed password(signup)", event.target.value);
+    this.setState({ confirmPasswordInputSignUp: event.target.value });
   };
 
   handleSubmitSignIn = async evt => {
@@ -61,17 +67,23 @@ class SignInOut extends Component {
   };
   handleSubmitSignup = async evt => {
     evt.preventDefault();
-    console.log("signup form submitted");
-    let data = new FormData();
-    data.append("username", this.state.usernameInputSignUp);
-    data.append("password", this.state.passwordInputSignUp);
-    console.log(data);
-    let response = await fetch("/signup", { method: "POST", body: data });
-    let bodyRes = await response.text();
-    console.log("/signup response", bodyRes);
-    let parsed = JSON.parse(bodyRes);
-    if (parsed.success) {
-      this.setState({ username: this.state.usernameInputSignUp });
+    if (
+      this.state.passwordInputSignUp === this.state.confirmPasswordInputSignUp
+    ) {
+      console.log("signup form submitted");
+      let data = new FormData();
+      data.append("username", this.state.usernameInputSignUp);
+      data.append("password", this.state.passwordInputSignUp);
+      console.log(data);
+      let response = await fetch("/signup", { method: "POST", body: data });
+      let bodyRes = await response.text();
+      console.log("/signup response", bodyRes);
+      let parsed = JSON.parse(bodyRes);
+      if (parsed.success) {
+        this.setState({ username: this.state.usernameInputSignUp });
+      }
+    } else {
+      alert("Something went wrong! Make sure both passwwords are the same.");
     }
   };
   render = () => {
@@ -148,6 +160,18 @@ class SignInOut extends Component {
                       class="input"
                       data-type="password"
                       onChange={this.handlePasswordChangeSignUp}
+                    />
+                  </div>
+                  <div class="group">
+                    <label for="pass" class="label">
+                      Confirm Password
+                    </label>
+                    <input
+                      id="pass"
+                      type="password"
+                      class="input"
+                      data-type="password"
+                      onChange={this.handleConfirmPasswordChangeSignUp}
                     />
                   </div>
                   <div class="group">

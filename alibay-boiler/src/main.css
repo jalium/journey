@@ -46,56 +46,29 @@ body {
   height: calc(100%-62px);
 }
 
-.signup {
-  font-family: "Lato", Arial, Helvetica, sans-serif;
-  color: white;
-  position: absolute;
-  top: 22.5%;
-  left: 66%;
-  display: flex;
-  justify-content: center;
-  border: solid 2px white;
-  padding: 200px 150px;
-  /* z-index: 500; */
-  background-color: rgba(0, 0, 0, 70%);
-  box-shadow: 5px 5px rgba(0, 0, 0, 70%);
-  border-radius: 15px;
-}
-
-.login {
-  font-family: "Lato", Arial, Helvetica, sans-serif;
-  color: white;
-  display: flex;
-  align-content: space-between;
-  justify-content: space-between;
-  border-left: solid 2px white;
-  z-index: 500;
-}
-
 .card {
   font-family: Arial, Helvetica, sans-serif;
   color: white;
-  /* display: flex;
-  justify-content: center; */
-  padding: 5px;
+  display: flex;
+  justify-content: space-between;
+  padding: 20px;
   margin: 15px;
-  border: solid 2px white;
-  /* z-index: 500; */
-  background-color: rgba(0, 0, 0, 70%);
-  box-shadow: 5px 5px rgba(0, 0, 0, 70%);
-  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.75);
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 50px;
 }
 
 .oneCard {
   font-family: Arial, Helvetica, sans-serif;
   color: white;
   /* display: flex;
-    justify-content: center; */
-  padding: 5px;
+  justify-content: space-between;
+  align-content: space-between; */
+  padding: 20px;
   margin: 15px;
-  border: solid 2px white;
-  /* z-index: 500; */
-  background-color: rgba(0, 0, 0, 70%);
-  box-shadow: 5px 5px rgba(0, 0, 0, 70%);
-  border-radius: 15px;
+  background-color: rgba(0, 0, 0, 0.75);
+  box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
+    0 17px 50px 0 rgba(0, 0, 0, 0.19);
+  border-radius: 50px;
 }

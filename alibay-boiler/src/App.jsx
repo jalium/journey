@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 import "./main.css";
 import "./login.css";
 import { BrowserRouter, Route } from "react-router-dom";
@@ -17,9 +18,11 @@ class UnconnectedApp extends Component {
     console.log(candidate);
     return (
       <div>
-        <div className="top-bar">
-          <img src="/uploads/logo2.png" />
-        </div>
+        <Link to="/experiences/">
+          <div className="top-bar">
+            <img src="/uploads/logo2.png" />
+          </div>
+        </Link>
         <SelectExp card={candidate[0]} />;
       </div>
     );
