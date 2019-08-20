@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { Link } from "react-router-dom";
 import BrowseExp from "./BrowseExp.jsx";
 import RatingStatic from "./RatingStatic.jsx";
-import Search from "./Search.jsx";
 
 class UnconnectedExperience extends Component {
   componentDidMount = async () => {
@@ -20,9 +19,6 @@ class UnconnectedExperience extends Component {
   render = () => {
     return (
       <div>
-        <div>
-          <Search />
-        </div>
         <div>{"Hi, " + this.props.name}</div>
         <div>
           <Link to={"/sellExp"}>List a Vacation</Link>

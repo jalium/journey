@@ -21,10 +21,10 @@ class UnconnectedSearch extends Component {
           <h3>Search for a destination</h3>
           <form onSubmit={this.handleSubmit}>
             <input type="text" ref={ref => (this.searchInput = ref)} />
-            <input type="submit" value="search" />
+            <input type="submit" value="Search" />
           </form>
           <form onSubmit={this.handleClear}>
-            <input type="submit" value="clear search" />
+            <input type="submit" value="Clear Search" />
           </form>
         </div>
       </div>

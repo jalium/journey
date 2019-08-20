@@ -8,7 +8,7 @@ import SellerForm from "./SellerForm.jsx";
 import Experience from "./Experiences.jsx";
 import SelectExp from "./SelectExp.jsx";
 import SignInOut from "./SignInAndOut.jsx";
-
+import Search from "./Search.jsx";
 
 class UnconnectedApp extends Component {
   renderListing = routerData => {
@@ -88,6 +88,7 @@ let renderExperiences = () => {
     <div>
       <div className="top-bar">
         <img src="/uploads/logo2.png" />
+        <Search />
       </div>
       <div>
         <Experience />
