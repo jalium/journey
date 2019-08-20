@@ -1,6 +1,5 @@
 import { connect } from "react-redux";
 import React, { Component } from "react";
-import { Redirect } from "react-router";
 
 class UnconnectedSearch extends Component {
   handleSubmit = event => {

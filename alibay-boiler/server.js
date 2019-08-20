@@ -1,5 +1,7 @@
 let express = require("express");
 let app = express();
+let cookieParser = require("cookie-parser");
+app.use(cookieParser());
 let MongoClient = require("mongodb").MongoClient;
 let ObjectID = require("mongodb").ObjectID;
 let reloadMagic = require("./reload-magic.js");
@@ -21,22 +23,51 @@ app.use("/uploads", express.static("uploads"));
 app.post("/signup", upload.none(), (req, res) => {
   let name = req.body.username;
   let pwd = req.body.password;
+  let fullName = req.body.fullName;
+  let email = req.body.email;
   console.log(name, pwd);
   dbo.collection("users").findOne({ username: name }, (err, user) => {
     if (err) {
-      console.log("/login error", err);
+      console.log("/signup error", err);
       res.send(JSON.stringify({ success: false }));
       return;
-    }
-    if (user === null) {
-      dbo.collection("users").insertOne({ username: name, password: pwd });
+    } else if (user === null) {
+      dbo.collection("users").insertOne({
+        fullName: fullName,
+        email: email,
+        username: name,
+        password: pwd
+      });
       console.log("username and pswd declared");
-      res.send(JSON.stringify({ success: true }));
-      return;
+
+      let generatedId = () => {
+        return "" + Math.floor(Math.random() * 100000000);
+      };
+
+      let sessionId = generatedId();
+      res.cookie("cookieName", sessionId);
+      console.log("cookie created successfully");
+
+      dbo.collection("cookies").insertOne(
+        {
+          username: name,
+          firstName: fullName.split(" ").shift(),
+          cookie: sessionId
+        },
+        (err, user) => {
+          if (err) {
+            console.log("/cookie error", err);
+            res.send(JSON.stringify({ success: false }));
+          } else {
+            let obj = { success: true, firstName: fullName.split(" ").shift() };
+            res.send(JSON.stringify(obj));
+          }
+        }
+      );
+    } else {
+      console.log("username exists");
+      res.send(JSON.stringify({ success: false }));
     }
-    console.log("username exists");
-    res.send(JSON.stringify({ success: false }));
-    return;
   });
 });
 
@@ -55,10 +86,21 @@ app.post("/login", upload.none(), (req, res) => {
       return;
     }
     if (user.password === pwd) {
-      res.send(JSON.stringify({ success: true }));
-      return;
+      console.log("cookie exists", req.cookies.cookieName);
+      dbo
+        .collection("cookies")
+        .findOne({ cookie: req.cookies.cookieName }, (err, user) => {
+          if (err) {
+            console.log("/experiences", err);
+            res.send(JSON.stringify({ success: false }));
+          } else if (user.firstName) {
+            let obj = { success: true, firstName: user.firstName };
+            res.send(JSON.stringify(obj));
+          }
+        });
+    } else {
+      res.send(JSON.stringify({ success: false }));
     }
-    res.send(JSON.stringify({ success: false }));
   });
 });
 

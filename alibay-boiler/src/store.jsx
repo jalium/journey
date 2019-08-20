@@ -3,6 +3,9 @@ let reducer = (state, action) => {
   if (action.type === "login-success") {
     return { ...state, loggedIn: true };
   }
+  if (action.type === "cookie") {
+    return { ...state, cookie: action.useCookie };
+  }
   if (action.type === "load-posts") {
     return { ...state, listings: action.posts };
   }
@@ -14,7 +17,7 @@ let reducer = (state, action) => {
 
 const store = createStore(
   reducer,
-  { listings: [], loggedIn: false, searchQuery: "" },
+  { listings: [], loggedIn: false, cookie: "", searchQuery: "" },
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 

@@ -23,6 +23,7 @@ class UnconnectedExperience extends Component {
         <div>
           <Search />
         </div>
+        <div>{"Hi, " + this.props.name}</div>
         <div>
           <Link to={"/sellExp"}>List a Vacation</Link>
         </div>
@@ -53,7 +54,8 @@ class UnconnectedExperience extends Component {
 let mapStateToProps = state => {
   return {
     posts: state.listings,
-    query: state.searchQuery
+    query: state.searchQuery,
+    name: state.cookie
   };
 };
 

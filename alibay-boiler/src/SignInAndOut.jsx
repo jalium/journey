@@ -3,12 +3,14 @@ import { connect } from "react-redux";
 import Experience from "./Experiences.jsx";
 import { Redirect } from "react-router";
 
-class SignInOut extends Component {
+class UnconnectedSignInOut extends Component {
   constructor(props) {
     super(props);
     this.state = {
       usernameInputSignIn: "",
       passwordInputSignIn: "",
+      fullNameInputSignUp: "",
+      emailInputSignUp: "",
       usernameInputSignUp: "",
       passwordInputSignUp: "",
       confirmPasswordInputSignUp: "",
@@ -23,6 +25,14 @@ class SignInOut extends Component {
   handlePasswordChangeSignIn = event => {
     console.log("new password(signin)", event.target.value);
     this.setState({ passwordInputSignIn: event.target.value });
+  };
+
+  handleFullNameChangeSignUp = event => {
+    this.setState({ fullNameInputSignUp: event.target.value });
+  };
+
+  handleEmailChangeSignUp = event => {
+    this.setState({ emailInputSignUp: event.target.value });
   };
 
   handleUsernameChangeSignUp = event => {
@@ -48,7 +58,8 @@ class SignInOut extends Component {
     data.append("password", this.state.passwordInputSignIn);
     let response = await fetch("/login", {
       method: "POST",
-      body: data
+      body: data,
+      credentials: "include"
     });
     let responseBody = await response.text();
     console.log("Login This is the responseBody", responseBody);
@@ -56,34 +67,39 @@ class SignInOut extends Component {
     console.log("Login This is the parsed body", body);
     if (body.success) {
       this.setState({ username: this.state.usernameInputSignIn });
+      this.props.dispatch({
+        type: "cookie",
+        useCookie: body.firstName
+      });
     }
     if (!body.success) {
       alert("Invalid LogIn");
       return;
     }
-    /*this.props.dispatch({
-      type: "login-success"
-    }); */
   };
   handleSubmitSignup = async evt => {
     evt.preventDefault();
-    if (
-      this.state.passwordInputSignUp === this.state.confirmPasswordInputSignUp
-    ) {
-      console.log("signup form submitted");
-      let data = new FormData();
-      data.append("username", this.state.usernameInputSignUp);
-      data.append("password", this.state.passwordInputSignUp);
-      console.log(data);
-      let response = await fetch("/signup", { method: "POST", body: data });
-      let bodyRes = await response.text();
-      console.log("/signup response", bodyRes);
-      let parsed = JSON.parse(bodyRes);
-      if (parsed.success) {
-        this.setState({ username: this.state.usernameInputSignUp });
-      }
-    } else {
-      alert("Something went wrong! Make sure both passwwords are the same.");
+    console.log("signup form submitted");
+    let data = new FormData();
+    data.append("fullName", this.state.fullNameInputSignUp);
+    data.append("email", this.state.emailInputSignUp);
+    data.append("username", this.state.usernameInputSignUp);
+    data.append("password", this.state.passwordInputSignUp);
+    console.log(data);
+    let response = await fetch("/signup", {
+      method: "POST",
+      body: data,
+      credentials: "include"
+    });
+    let bodyRes = await response.text();
+    console.log("/signup response", bodyRes);
+    let parsed = JSON.parse(bodyRes);
+    if (parsed.success) {
+      this.setState({ username: this.state.usernameInputSignUp });
+      this.props.dispatch({
+        type: "cookie",
+        useCookie: parsed.firstName
+      });
     }
   };
   render = () => {
@@ -141,6 +157,28 @@ class SignInOut extends Component {
                 <div class="sign-up-htm">
                   <div class="group">
                     <label for="user" class="label">
+                      Full Name
+                    </label>
+                    <input
+                      id="user"
+                      type="text"
+                      class="input"
+                      onChange={this.handleFullNameChangeSignUp}
+                    />
+                  </div>
+                  <div class="group">
+                    <label for="user" class="label">
+                      E-mail
+                    </label>
+                    <input
+                      id="user"
+                      type="text"
+                      class="input"
+                      onChange={this.handleEmailChangeSignUp}
+                    />
+                  </div>
+                  <div class="group">
+                    <label for="user" class="label">
                       Username
                     </label>
                     <input
@@ -193,5 +231,10 @@ class SignInOut extends Component {
   };
 }
 
-// let SignUpApp = connect()(Signup);
+let mapStateToProps = state => {
+  return {
+    cookie: state.cookie
+  };
+};
+let SignInOut = connect(mapStateToProps)(UnconnectedSignInOut);
 export default SignInOut;

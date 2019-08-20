@@ -1,18 +1,18 @@
-import React from 'react'
-import { Component } from 'react'
-import StripeCheckout from 'react-stripe-checkout';
+import React from "react";
+import { Component } from "react";
+import StripeCheckout from "react-stripe-checkout";
 
-class Payment extends Component{
-onToken = (token) => {
-    fetch('/save-stripe-token', {
-      method: 'POST',
-      body: JSON.stringify(token),
+class Payment extends Component {
+  onToken = token => {
+    fetch("/save-stripe-token", {
+      method: "POST",
+      body: JSON.stringify(token)
     }).then(response => {
       response.json().then(data => {
         alert(`We are in business, ${data.email}`);
       });
     });
-  }
+  };
 
   // ...
 
@@ -30,8 +30,8 @@ onToken = (token) => {
         locale="auto"
         description="Journey Get Away Today"
       />
-    )
+    );
   }
 }
 
-export default Payment 
+export default Payment;
