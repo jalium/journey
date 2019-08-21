@@ -88,13 +88,26 @@ body {
   color: white;
   display: flex;
   justify-content: space-evenly;
-  width: 90%;
+  width: 95%;
   padding: 20px;
   margin: 15px;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.9);
   box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
-  border-radius: 50px;
+  border-radius: 10px;
+  text-transform: capitalize;
+}
+
+.card a {
+  text-decoration: underline;
+  font-weight: 200;
+}
+
+.card img {
+  margin: 5px;
+  border-style: solid;
+  border-color: azure;
+  border-radius: 2px;
 }
 
 .oneCard {
