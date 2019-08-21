@@ -16,11 +16,15 @@ class UnconnectedSearch extends Component {
 
   render = () => {
     return (
-      <div>
+      <div class="search-container">
         <div>
-          <h3>Search for a destination</h3>
           <form onSubmit={this.handleSubmit}>
-            <input type="text" ref={ref => (this.searchInput = ref)} />
+            <input
+              class="search-input"
+              placeholder="Search experiences..."
+              type="text"
+              ref={ref => (this.searchInput = ref)}
+            />
             <input type="submit" value="Search" />
           </form>
           <form onSubmit={this.handleClear}>

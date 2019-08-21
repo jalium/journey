@@ -37,7 +37,7 @@ class SellerForm extends Component {
     console.log("This is the rating input", rating);
     this.setState({ rating: rating });
   };
-  handleDateChange = (dateRange) => {
+  handleDateChange = dateRange => {
     console.log("You're in the handleDateChange");
     console.log("This is the date input", dateRange);
     this.setState({ date: dateRange });
@@ -79,19 +79,20 @@ handleXXXChange = () => {
   };
   render = () => {
     return (
-      <form onSubmit={this.handleSubmit}>
-        <h2>List a vacation</h2>
-        <div>
-          What is the listing title?
-          <input type="text" onChange={this.handleTitleChange} />
+      <div className="oneCard">
+        <form onSubmit={this.handleSubmit}>
+          <h2>List a vacation</h2>
           <div>
-            What is the destination?
-            <input type="text" onChange={this.handleDestinationChange} />
+            What is the listing title?
+            <input type="text" onChange={this.handleTitleChange} />
             <div>
-              What are the amenities?
-              <Amenities onCheck={this.handleAmenitiesChange} />
+              What is the destination?
+              <input type="text" onChange={this.handleDestinationChange} />
               <div>
-                <RatingChangeApp onClick={this.handleRatingChange} />
+                What are the amenities?
+                <Amenities onCheck={this.handleAmenitiesChange} />
+                <div>
+                  <RatingChangeApp onClick={this.handleRatingChange} />
                   <div>
                     What is the price?
                     <input type="text" onChange={this.handlePriceChange} />
@@ -104,8 +105,9 @@ handleXXXChange = () => {
               </div>
             </div>
           </div>
-        <input type="submit" />
-      </form>
+          <input type="submit" />
+        </form>
+      </div>
     );
   };
 }

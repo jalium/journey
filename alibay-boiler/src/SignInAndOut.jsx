@@ -56,6 +56,7 @@ class UnconnectedSignInOut extends Component {
     let data = new FormData();
     data.append("username", this.state.usernameInputSignIn);
     data.append("password", this.state.passwordInputSignIn);
+    console.log("-------------------------------", );
     let response = await fetch("/login", {
       method: "POST",
       body: data,
@@ -70,6 +71,9 @@ class UnconnectedSignInOut extends Component {
       this.props.dispatch({
         type: "cookie",
         useCookie: body.firstName
+      });
+      this.props.dispatch({
+        type: "login"
       });
     }
     if (!body.success) {
@@ -99,6 +103,9 @@ class UnconnectedSignInOut extends Component {
       this.props.dispatch({
         type: "cookie",
         useCookie: parsed.firstName
+      });
+      this.props.dispatch({
+        type: "login"
       });
     }
   };
@@ -227,7 +234,11 @@ class UnconnectedSignInOut extends Component {
       );
     }
 
-    return <Redirect to="/experiences" />;
+    return (
+      <div>
+        <Redirect to="/experiences" />
+      </div>
+    );
   };
 }
 

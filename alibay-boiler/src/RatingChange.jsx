@@ -1,29 +1,29 @@
-import React from 'react';
-import StarRatingComponent from 'react-star-rating-component';
-import {connect} from 'react-redux'
-import {Component} from 'react'
- 
+import React from "react";
+import StarRatingComponent from "react-star-rating-component";
+import { connect } from "react-redux";
+import { Component } from "react";
+
 class RatingChange extends Component {
   constructor() {
     super();
- 
+
     this.state = {
-      rating: 0
+      rating: 3
     };
   }
- 
+
   onStarClick(nextValue, prevValue, name) {
-    this.props.onClick(nextValue)
-    this.setState({rating: nextValue});
+    this.props.onClick(nextValue);
+    this.setState({ rating: nextValue });
   }
   render() {
     const { rating } = this.state;
-    
-    return (                
+
+    return (
       <div>
         <div>What is the rating of this Vacation?</div>
-        <StarRatingComponent 
-          name="rate1" 
+        <StarRatingComponent
+          name="rate1"
           starCount={5}
           value={rating}
           onStarClick={this.onStarClick.bind(this)}
@@ -34,7 +34,7 @@ class RatingChange extends Component {
 }
 
 let RatingChangeApp = connect()(RatingChange);
-export default RatingChangeApp
+export default RatingChangeApp;
 
 //SellerForm.jsx --> Parent
 /*   handleRatingChange = rating => {

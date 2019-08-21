@@ -18,31 +18,29 @@ class UnconnectedExperience extends Component {
 
   render = () => {
     return (
-      <div>
-        <div>{"Hi, " + this.props.name}</div>
-        <div>
-          <Link to={"/sellExp"}>List a Vacation</Link>
+      <div className="card-wrapper">
+        <div className="content">
+          {this.props.posts
+            .filter(experience =>
+              experience.destination
+                .toLowerCase()
+                .includes(this.props.query.toLowerCase())
+            )
+            .map(post => {
+              return (
+                <BrowseExp
+                  listingTitle={post.listingTitle}
+                  destination={post.destination}
+                  amenities={post.amenities}
+                  rating={<RatingStatic rating={post.rating} />}
+                  date={post.date}
+                  price={post.price}
+                  frontendPath={post.frontendPath}
+                  listingId={post._id}
+                />
+              );
+            })}
         </div>
-        {this.props.posts
-          .filter(experience =>
-            experience.destination
-              .toLowerCase()
-              .includes(this.props.query.toLowerCase())
-          )
-          .map(post => {
-            return (
-              <BrowseExp
-                listingTitle={post.listingTitle}
-                destination={post.destination}
-                amenities={post.amenities}
-                rating={<RatingStatic rating={post.rating} />}
-                date={post.date}
-                price={post.price}
-                frontendPath={post.frontendPath}
-                listingId={post._id}
-              />
-            );
-          })}
       </div>
     );
   };

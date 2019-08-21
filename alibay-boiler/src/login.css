@@ -3,8 +3,7 @@
 body {
   margin: 0;
   color: white;
-  /* background: white; */
-  font: 600 16px/18px "Lato" "Open Sans", sans-serif;
+  font: 600 16px/18px "Lato", "Open Sans", sans-serif;
 }
 *,
 :after,
@@ -36,7 +35,7 @@ a {
   background-color: rgba(0, 0, 0, 0.5);
   box-shadow: 0 12px 15px 0 rgba(0, 0, 0, 0.24),
     0 17px 50px 0 rgba(0, 0, 0, 0.19);
-  border-radius: 25px;
+  border-radius: 7px;
   z-index: -1;
 }
 .login-html {
@@ -45,7 +44,7 @@ a {
   position: absolute;
   padding: 90px 70px 50px 70px;
   background: rgba(0, 0, 0, 0.5);
-  border-radius: 25px;
+  border-radius: 7px;
 }
 .login-html .sign-in-htm,
 .login-html .sign-up-htm {
@@ -165,7 +164,7 @@ a {
 
 .hr {
   height: 2px;
-  margin: 60px 0 50px 0;
+  margin: 20px 0 15px 0;
   background: rgba(255, 255, 255, 0.2);
 }
 .foot-lnk {

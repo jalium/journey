@@ -1,0 +1,29 @@
+.react-daterange-picker__inputGroup__input {
+  min-width: 0.54em;
+  height: 100%;
+  position: relative;
+  padding: 0 1px;
+  border: 0;
+  background: none;
+  color: white !important;
+  font: inherit;
+  box-sizing: content-box;
+  -moz-appearance: textfield;
+}
+
+.react-daterange-picker__button svg {
+  stroke: white !important;
+}
+
+/* .react-daterange-picker__button svg {
+    display: inherit;
+}
+.react-daterange-picker__button:enabled:hover
+  .react-daterange-picker__button__icon,
+.react-daterange-picker__button:enabled:focus
+  .react-daterange-picker__button__icon {
+      stroke: #0078d7;
+}
+.react-daterange-picker__button:disabled .react-daterange-picker__button__icon {
+    stroke: white;
+} */
