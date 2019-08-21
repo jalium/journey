@@ -36,3 +36,17 @@ class RatingChange extends Component {
 let RatingChangeApp = connect()(RatingChange);
 export default RatingChangeApp
 
+//SellerForm.jsx --> Parent
+/*   handleRatingChange = rating => {
+    console.log("You're in the handleRatingChange");
+    console.log("This is the rating input", rating);
+    this.setState({ rating: rating });
+  };*/
+//<RatingChangeApp onClick={this.handleRatingChange} />
+//RatingChange.jsx --> Child
+/*
+onStarClick(nextValue, prevValue, name) {
+    this.props.onClick(nextValue)
+    this.setState({rating: nextValue});
+  }
+*/

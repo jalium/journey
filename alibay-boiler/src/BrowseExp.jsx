@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./main.css";
+import Checkout from "./Checkout.jsx"
 
 class BrowseExp extends Component {
   render = () => {

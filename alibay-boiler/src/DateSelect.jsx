@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import DateRangePicker from '@wojtekmaj/react-daterange-picker';
+import Checkout from './Checkout.jsx'
 
 class DateSelect extends Component {
   state = {
@@ -9,7 +10,9 @@ class DateSelect extends Component {
   onChange = (date) =>{
       this.setState({ date })
       console.log(date)
+      this.props.onClick(date)
   }
+  
 
   render() {
     return (
@@ -23,3 +26,4 @@ class DateSelect extends Component {
   }
 }
 export default DateSelect
+

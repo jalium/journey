@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+/*import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "./main.css";
 
@@ -22,3 +22,4 @@ class ListingCard extends Component {
 export default ListingCard;
 
 //take the string from mongo 
+*/
