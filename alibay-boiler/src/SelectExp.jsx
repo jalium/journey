@@ -33,26 +33,32 @@ class SelectExp extends Component {
     //console.log("amenitiesArray", amenitiesArray)
     const perks = amenitiesArray.map(amen => {
       return (
-        <li>
-          {amen} <img height="15px" src={"/uploads/" + amen + ".png"} />
-        </li>
+        <div>
+          <img height="15px" src={"/uploads/" + amen + ".png"} /> {amen}
+        </div>
       ); //listing each one but we want to list each one with the image of the same name
     });
     return (
       <div className="scroll">
         <div className="oneCard">
           <div className="cardText">
-            <div>{this.props.card.listingTitle}</div>
-            <div>Destination: {this.props.card.destination}</div>
-            <div>{perks}</div>
+            <h2>{this.props.card.listingTitle}</h2>
+            <h3>Destination: {this.props.card.destination}</h3>
+            <div className="amenities">
+              <h3>{"Amenities: "}</h3>
+              <div>{perks}</div>
+            </div>
+            <br />
             <div>
               Rating: <RatingStatic rating={this.props.card.rating} />
             </div>
+            <br />
             <div>
               Travel Dates:
               <DateSelect onClick={this.handleDates} />
             </div>
-            <div>Total Price: {this.props.card.price}</div>
+            <br />
+            <div>Total Price: ${this.props.card.price}</div>
             <div>
               <Link
                 to={{

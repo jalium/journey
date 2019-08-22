@@ -13,8 +13,8 @@ class BrowseExp extends Component {
           </Link>
           <br />
           <br />
-          <div>destination: {this.props.destination}</div>
           <div> {this.props.rating}</div>
+          <div>destination: {this.props.destination}</div>
           <div>total price: {"$" + this.props.price}</div>
         </div>
         <img height="100px" src={this.props.frontendPath} />

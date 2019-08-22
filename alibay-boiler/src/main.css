@@ -130,6 +130,19 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin: 50px;
+}
+
+.amenities {
+  display: flex;
+}
+
+.amenities div {
+  margin: 10px;
+}
+
+.cardText h2 {
+  text-align: center;
 }
 .stripe-button-el span {
   color: black;
